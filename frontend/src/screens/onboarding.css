@@ -1,0 +1,361 @@
+/* Tela de onboarding/spike: escura e espaçada — linguagem "marketing".
+   Contraste deliberado com a tela operacional (clara e densa). */
+
+.onb {
+  --bg: #0b0f16;
+  --bg-elev: #121826;
+  --line: #1e2635;
+  --txt: #e8ecf3;
+  --txt-dim: #8e9bb3;
+  --verde: #4ade80;
+  --verde-esc: #15803d;
+  --vermelho: #f87171;
+
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  color: var(--txt);
+  background:
+    radial-gradient(1100px 520px at 12% -8%, rgba(74, 222, 128, 0.13), transparent 60%),
+    radial-gradient(900px 500px at 105% 8%, rgba(56, 189, 248, 0.08), transparent 55%),
+    var(--bg);
+}
+
+/* ---------- topo ---------- */
+
+.onb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.onb-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.onb-brand strong {
+  display: block;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.onb-brand small {
+  color: var(--txt-dim);
+  font-size: 0.78rem;
+}
+
+/* logo: mesmo motivo de código de barras do ícone do app */
+.onb-logo {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 38px;
+  height: 38px;
+  padding: 0 7px;
+  border-radius: 10px;
+  background: linear-gradient(160deg, var(--verde), var(--verde-esc));
+}
+
+.onb-logo i {
+  display: block;
+  width: 2px;
+  height: 17px;
+  border-radius: 1px;
+  background: #0b1220;
+}
+
+.onb-logo i:nth-child(2) { width: 4px; }
+.onb-logo i:nth-child(3) { width: 2px; height: 13px; }
+.onb-logo i:nth-child(4) { width: 5px; }
+
+.onb-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  color: var(--txt-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-elev);
+}
+
+.onb-status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--txt-dim);
+}
+
+.onb-status.online {
+  color: var(--verde);
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+.onb-status.online .dot {
+  background: var(--verde);
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.16);
+}
+
+.onb-status.offline {
+  color: var(--vermelho);
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.onb-status.offline .dot {
+  background: var(--vermelho);
+}
+
+/* ---------- conteúdo ---------- */
+
+.onb-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 2.5rem;
+  align-content: center;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.6rem;
+}
+
+@media (max-width: 940px) {
+  .onb-content {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+.onb-badge {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--verde);
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 999px;
+}
+
+.onb h1 {
+  margin: 1.1rem 0 0.9rem;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+}
+
+.onb .hl {
+  background: linear-gradient(100deg, var(--verde), #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.onb-content > section > p {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--txt-dim);
+  line-height: 1.65;
+}
+
+.onb-content strong {
+  color: var(--txt);
+  font-weight: 600;
+}
+
+.onb-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+}
+
+.btn-primaria {
+  padding: 0.85rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 650;
+  color: #06210f;
+  background: linear-gradient(180deg, #5ce792, var(--verde));
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px -10px rgba(74, 222, 128, 0.7);
+  transition: transform 0.12s, box-shadow 0.12s, filter 0.12s;
+}
+
+.btn-primaria:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 12px 26px -10px rgba(74, 222, 128, 0.8);
+}
+
+.btn-primaria:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-primaria:disabled {
+  opacity: 0.55;
+  cursor: default;
+  box-shadow: none;
+}
+
+.btn-secundaria {
+  padding: 0.85rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--txt);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.btn-secundaria:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #2c3648;
+}
+
+.onb-latencia {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--verde);
+  border: 1px dashed rgba(74, 222, 128, 0.35);
+  border-radius: 8px;
+}
+
+.onb-alerta {
+  margin-top: 1.3rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  border-radius: 10px;
+}
+
+.onb-alerta code {
+  padding: 0.1rem 0.35rem;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+}
+
+/* ---------- painel de resposta ---------- */
+
+.onb-painel {
+  padding: 1.5rem;
+  background: linear-gradient(180deg, rgba(18, 24, 38, 0.95), rgba(14, 19, 30, 0.95));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.onb-painel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.onb-painel-head h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--txt-dim);
+}
+
+.onb-tag {
+  padding: 0.22rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--verde);
+  background: rgba(74, 222, 128, 0.12);
+  border-radius: 6px;
+}
+
+.onb-mensagem {
+  margin: 1.2rem 0 1.4rem;
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.onb-painel dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.onb-painel dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.onb-painel dl > div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.onb-painel dt {
+  font-size: 0.82rem;
+  color: var(--txt-dim);
+}
+
+.onb-painel dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.onb-vazio {
+  margin: 1.3rem 0 0.2rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--txt-dim);
+}
+
+/* ---------- rodapé ---------- */
+
+.onb-rodape {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem 1.5rem;
+  padding: 1.1rem 1.6rem;
+  font-size: 0.82rem;
+  color: var(--txt-dim);
+  border-top: 1px solid var(--line);
+}
+
+.onb-rodape .peca {
+  margin-right: 0.4rem;
+  font-family: 'Cascadia Code', Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--verde);
+}
+
+.onb-rodape em {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.76rem;
+  font-style: normal;
+  opacity: 0.65;
+}

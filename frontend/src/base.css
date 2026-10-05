@@ -1,0 +1,31 @@
+/* Reset mínimo comum. Cada tela define seu próprio tema:
+   onboarding = escuro/marketing · PDV = claro/denso/alto contraste. */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* terminal de caixa: nada de seleção ou arraste acidental */
+  user-select: none;
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+/* o operador digita: aqui a seleção é bem-vinda */
+input {
+  user-select: text;
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZVMwk06B+EU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Katsuki\\Documents\\Projetos\\hello-desktop\\shell\\Hello.Shell.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Katsuki\\.nuget\\packages\\microsoft.web.webview2\\1.0.4129.50\\microsoft.web.webview2.1.0.4129.50.nupkg.sha512"
+  ],
+  "logs": []
+}

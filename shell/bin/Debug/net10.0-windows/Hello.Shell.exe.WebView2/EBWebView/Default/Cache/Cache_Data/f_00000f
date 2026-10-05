@@ -1,0 +1,404 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/screens/Onboarding.tsx");const useCallback = __vite__cjsImport0_react["useCallback"]; const useEffect = __vite__cjsImport0_react["useEffect"]; const useState = __vite__cjsImport0_react["useState"];const _jsxDEV = __vite__cjsImport3_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport3_react_jsxDevRuntime["Fragment"];import __vite__cjsImport0_react from "/node_modules/.vite/deps/react.js?v=8928db56";
+import { api } from "/src/api.ts";
+import "/src/screens/onboarding.css";
+var _jsxFileName = "C:/Users/Katsuki/Documents/Projetos/hello-desktop/frontend/src/screens/Onboarding.tsx";
+import __vite__cjsImport3_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=8928db56";
+var _s = $RefreshSig$();
+export default function Onboarding({ onAbrirPdv }) {
+	_s();
+	const [status, setStatus] = useState("verificando");
+	const [resposta, setResposta] = useState(null);
+	const [latencia, setLatencia] = useState(null);
+	const [erro, setErro] = useState(null);
+	const [carregando, setCarregando] = useState(false);
+	const chamarApi = useCallback(async (silencioso = false) => {
+		if (!silencioso) setCarregando(true);
+		setErro(null);
+		try {
+			const inicio = performance.now();
+			const dados = await api.hello();
+			setLatencia(performance.now() - inicio);
+			setResposta(dados);
+			setStatus("online");
+		} catch (e) {
+			setStatus("offline");
+			if (!silencioso) setErro(e.message);
+		} finally {
+			setCarregando(false);
+		}
+	}, []);
+	// health-check ao abrir: o app precisa saber se a API local subiu
+	useEffect(() => {
+		chamarApi(true);
+	}, [chamarApi]);
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "onb",
+		children: [
+			/* @__PURE__ */ _jsxDEV("header", {
+				className: "onb-top",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "onb-brand",
+					children: [/* @__PURE__ */ _jsxDEV("span", {
+						className: "onb-logo",
+						"aria-hidden": "true",
+						children: [
+							/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 18
+							}, this),
+							/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 23
+							}, this),
+							/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 28
+							}, this),
+							/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 33
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "MM ERP" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 44,
+						columnNumber: 13
+					}, this), /* @__PURE__ */ _jsxDEV("small", { children: "Spike de arquitetura" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 45,
+						columnNumber: 13
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 39,
+					columnNumber: 9
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: `onb-status ${status}`,
+					children: [/* @__PURE__ */ _jsxDEV("span", { className: "dot" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 50,
+						columnNumber: 11
+					}, this), status === "online" ? "API local conectada" : status === "offline" ? "API local indisponível" : "verificando..."]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 49,
+					columnNumber: 9
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 38,
+				columnNumber: 7
+			}, this),
+			/* @__PURE__ */ _jsxDEV("main", {
+				className: "onb-content",
+				children: [/* @__PURE__ */ _jsxDEV("section", { children: [
+					/* @__PURE__ */ _jsxDEV("span", {
+						className: "onb-badge",
+						children: "app desktop · offline-first"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 57,
+						columnNumber: 11
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h1", { children: [
+						"React renderizando dentro do ",
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "hl",
+							children: "WebView2"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 59,
+							columnNumber: 42
+						}, this),
+						", numa janela WPF."
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 58,
+						columnNumber: 11
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: [
+						"Esta tela é HTML/CSS/JS empacotado no executável. Os botões abaixo chamam a API .NET que roda ",
+						/* @__PURE__ */ _jsxDEV("strong", { children: "nesta mesma máquina" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 64,
+							columnNumber: 40
+						}, this),
+						", em loopback — sem internet, sem servidor remoto."
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 62,
+						columnNumber: 11
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "onb-acoes",
+						children: [
+							/* @__PURE__ */ _jsxDEV("button", {
+								className: "btn-primaria",
+								onClick: () => chamarApi(),
+								disabled: carregando,
+								children: carregando ? "Chamando API..." : "Disparar Hello World"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 69,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("button", {
+								className: "btn-secundaria",
+								onClick: onAbrirPdv,
+								children: "Abrir cadastro / operacional →"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 72,
+								columnNumber: 13
+							}, this),
+							latencia !== null && /* @__PURE__ */ _jsxDEV("span", {
+								className: "onb-latencia",
+								title: "Ida e volta até a API local",
+								children: [latencia < 1 ? "< 1" : latencia.toFixed(1), " ms"]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 76,
+								columnNumber: 15
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 68,
+						columnNumber: 11
+					}, this),
+					erro && /* @__PURE__ */ _jsxDEV("div", {
+						className: "onb-alerta",
+						children: [
+							"Não foi possível falar com a API local (",
+							erro,
+							"). Ela sobe junto com a casca — confira o processo ",
+							/* @__PURE__ */ _jsxDEV("code", { children: "Hello.Api" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 85,
+								columnNumber: 42
+							}, this),
+							"."
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 83,
+						columnNumber: 13
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 56,
+					columnNumber: 9
+				}, this), /* @__PURE__ */ _jsxDEV("section", {
+					className: "onb-painel",
+					children: [/* @__PURE__ */ _jsxDEV("div", {
+						className: "onb-painel-head",
+						children: [/* @__PURE__ */ _jsxDEV("h2", { children: "Resposta do backend" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 92,
+							columnNumber: 13
+						}, this), resposta && /* @__PURE__ */ _jsxDEV("span", {
+							className: "onb-tag",
+							children: "200 OK"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 93,
+							columnNumber: 26
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 91,
+						columnNumber: 11
+					}, this), resposta ? /* @__PURE__ */ _jsxDEV(_Fragment, { children: [/* @__PURE__ */ _jsxDEV("p", {
+						className: "onb-mensagem",
+						children: resposta.mensagem
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 98,
+						columnNumber: 15
+					}, this), /* @__PURE__ */ _jsxDEV("dl", { children: [
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("dt", { children: "Runtime" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 100,
+							columnNumber: 22
+						}, this), /* @__PURE__ */ _jsxDEV("dd", { children: resposta.runtime }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 100,
+							columnNumber: 38
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 100,
+							columnNumber: 17
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("dt", { children: "Máquina" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 101,
+							columnNumber: 22
+						}, this), /* @__PURE__ */ _jsxDEV("dd", { children: resposta.maquina }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 101,
+							columnNumber: 38
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 101,
+							columnNumber: 17
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("dt", { children: "Horário do servidor local" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 102,
+							columnNumber: 22
+						}, this), /* @__PURE__ */ _jsxDEV("dd", { children: resposta.horario }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 102,
+							columnNumber: 56
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 102,
+							columnNumber: 17
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 99,
+						columnNumber: 15
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 97,
+						columnNumber: 13
+					}, this) : /* @__PURE__ */ _jsxDEV("p", {
+						className: "onb-vazio",
+						children: "Nenhuma chamada ainda. Clique no botão para falar com o .NET."
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 106,
+						columnNumber: 13
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 90,
+					columnNumber: 9
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 55,
+				columnNumber: 7
+			}, this),
+			/* @__PURE__ */ _jsxDEV("footer", {
+				className: "onb-rodape",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "peca",
+							children: "frontend/"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 112,
+							columnNumber: 14
+						}, this),
+						" React + Vite",
+						/* @__PURE__ */ _jsxDEV("em", { children: "todas as telas" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 112,
+							columnNumber: 66
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 112,
+						columnNumber: 9
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "peca",
+							children: "shell/"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 113,
+							columnNumber: 14
+						}, this),
+						" WPF + WebView2",
+						/* @__PURE__ */ _jsxDEV("em", { children: "só a moldura" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 113,
+							columnNumber: 65
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 113,
+						columnNumber: 9
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "peca",
+							children: "backend/"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 114,
+							columnNumber: 14
+						}, this),
+						" .NET 10 local",
+						/* @__PURE__ */ _jsxDEV("em", { children: "domínio, fiscal, hardware" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 114,
+							columnNumber: 66
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 114,
+						columnNumber: 9
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 111,
+				columnNumber: 7
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 37,
+		columnNumber: 5
+	}, this);
+}
+_s(Onboarding, "wulDHrelVvWhFKSFJU2WYRizNQo=");
+_c = Onboarding;
+var _c;
+$RefreshReg$(_c, "Onboarding");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/screens/Onboarding.tsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Katsuki/Documents/Projetos/hello-desktop/frontend/src/screens/Onboarding.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Katsuki/Documents/Projetos/hello-desktop/frontend/src/screens/Onboarding.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/Katsuki/Documents/Projetos/hello-desktop/frontend/src/screens/Onboarding.tsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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LDRCQUE2Qjs7Ozs7S0FBTTs7Ozs7SUFDMUY7Ozs7OztFQUNMOzs7Ozs7QUFFVCIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJPbmJvYXJkaW5nLnRzeCJdLCJ2ZXJzaW9uIjozLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB1c2VDYWxsYmFjaywgdXNlRWZmZWN0LCB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0J1xyXG5pbXBvcnQgeyBhcGksIHR5cGUgSGVsbG8gfSBmcm9tICcuLi9hcGknXHJcbmltcG9ydCAnLi9vbmJvYXJkaW5nLmNzcydcclxuXHJcbnR5cGUgU3RhdHVzID0gJ3ZlcmlmaWNhbmRvJyB8ICdvbmxpbmUnIHwgJ29mZmxpbmUnXHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBPbmJvYXJkaW5nKHsgb25BYnJpclBkdiB9OiB7IG9uQWJyaXJQZHY6ICgpID0+IHZvaWQgfSkge1xyXG4gIGNvbnN0IFtzdGF0dXMsIHNldFN0YXR1c10gPSB1c2VTdGF0ZTxTdGF0dXM+KCd2ZXJpZmljYW5kbycpXHJcbiAgY29uc3QgW3Jlc3Bvc3RhLCBzZXRSZXNwb3N0YV0gPSB1c2VTdGF0ZTxIZWxsbyB8IG51bGw+KG51bGwpXHJcbiAgY29uc3QgW2xhdGVuY2lhLCBzZXRMYXRlbmNpYV0gPSB1c2VTdGF0ZTxudW1iZXIgfCBudWxsPihudWxsKVxyXG4gIGNvbnN0IFtlcnJvLCBzZXRFcnJvXSA9IHVzZVN0YXRlPHN0cmluZyB8IG51bGw+KG51bGwpXHJcbiAgY29uc3QgW2NhcnJlZ2FuZG8sIHNldENhcnJlZ2FuZG9dID0gdXNlU3RhdGUoZmFsc2UpXHJcblxyXG4gIGNvbnN0IGNoYW1hckFwaSA9IHVzZUNhbGxiYWNrKGFzeW5jIChzaWxlbmNpb3NvID0gZmFsc2UpID0+IHtcclxuICAgIGlmICghc2lsZW5jaW9zbykgc2V0Q2FycmVnYW5kbyh0cnVlKVxyXG4gICAgc2V0RXJybyhudWxsKVxyXG4gICAgdHJ5IHtcclxuICAgICAgY29uc3QgaW5pY2lvID0gcGVyZm9ybWFuY2Uubm93KClcclxuICAgICAgY29uc3QgZGFkb3MgPSBhd2FpdCBhcGkuaGVsbG8oKVxyXG4gICAgICBzZXRMYXRlbmNpYShwZXJmb3JtYW5jZS5ub3coKSAtIGluaWNpbylcclxuICAgICAgc2V0UmVzcG9zdGEoZGFkb3MpXHJcbiAgICAgIHNldFN0YXR1cygnb25saW5lJylcclxuICAgIH0gY2F0Y2ggKGUpIHtcclxuICAgICAgc2V0U3RhdHVzKCdvZmZsaW5lJylcclxuICAgICAgaWYgKCFzaWxlbmNpb3NvKSBzZXRFcnJvKChlIGFzIEVycm9yKS5tZXNzYWdlKVxyXG4gICAgfSBmaW5hbGx5IHtcclxuICAgICAgc2V0Q2FycmVnYW5kbyhmYWxzZSlcclxuICAgIH1cclxuICB9LCBbXSlcclxuXHJcbiAgLy8gaGVhbHRoLWNoZWNrIGFvIGFicmlyOiBvIGFwcCBwcmVjaXNhIHNhYmVyIHNlIGEgQVBJIGxvY2FsIHN1Yml1XHJcbiAgdXNlRWZmZWN0KCgpID0+IHtcclxuICAgIGNoYW1hckFwaSh0cnVlKVxyXG4gIH0sIFtjaGFtYXJBcGldKVxyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiBjbGFzc05hbWU9XCJvbmJcIj5cclxuICAgICAgPGhlYWRlciBjbGFzc05hbWU9XCJvbmItdG9wXCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJvbmItYnJhbmRcIj5cclxuICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cIm9uYi1sb2dvXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCI+XHJcbiAgICAgICAgICAgIDxpIC8+PGkgLz48aSAvPjxpIC8+PGkgLz5cclxuICAgICAgICAgIDwvc3Bhbj5cclxuICAgICAgICAgIDxkaXY+XHJcbiAgICAgICAgICAgIDxzdHJvbmc+TU0gRVJQPC9zdHJvbmc+XHJcbiAgICAgICAgICAgIDxzbWFsbD5TcGlrZSBkZSBhcnF1aXRldHVyYTwvc21hbGw+XHJcbiAgICAgICAgICA8L2Rpdj5cclxuICAgICAgICA8L2Rpdj5cclxuXHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9e2BvbmItc3RhdHVzICR7c3RhdHVzfWB9PlxyXG4gICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZG90XCIgLz5cclxuICAgICAgICAgIHtzdGF0dXMgPT09ICdvbmxpbmUnID8gJ0FQSSBsb2NhbCBjb25lY3RhZGEnIDogc3RhdHVzID09PSAnb2ZmbGluZScgPyAnQVBJIGxvY2FsIGluZGlzcG9uw612ZWwnIDogJ3ZlcmlmaWNhbmRvLi4uJ31cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9oZWFkZXI+XHJcblxyXG4gICAgICA8bWFpbiBjbGFzc05hbWU9XCJvbmItY29udGVudFwiPlxyXG4gICAgICAgIDxzZWN0aW9uPlxyXG4gICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwib25iLWJhZGdlXCI+YXBwIGRlc2t0b3Agwrcgb2ZmbGluZS1maXJzdDwvc3Bhbj5cclxuICAgICAgICAgIDxoMT5cclxuICAgICAgICAgICAgUmVhY3QgcmVuZGVyaXphbmRvIGRlbnRybyBkbyA8c3BhbiBjbGFzc05hbWU9XCJobFwiPldlYlZpZXcyPC9zcGFuPixcclxuICAgICAgICAgICAgbnVtYSBqYW5lbGEgV1BGLlxyXG4gICAgICAgICAgPC9oMT5cclxuICAgICAgICAgIDxwPlxyXG4gICAgICAgICAgICBFc3RhIHRlbGEgw6kgSFRNTC9DU1MvSlMgZW1wYWNvdGFkbyBubyBleGVjdXTDoXZlbC4gT3MgYm90w7VlcyBhYmFpeG9cclxuICAgICAgICAgICAgY2hhbWFtIGEgQVBJIC5ORVQgcXVlIHJvZGEgPHN0cm9uZz5uZXN0YSBtZXNtYSBtw6FxdWluYTwvc3Ryb25nPiwgZW1cclxuICAgICAgICAgICAgbG9vcGJhY2sg4oCUIHNlbSBpbnRlcm5ldCwgc2VtIHNlcnZpZG9yIHJlbW90by5cclxuICAgICAgICAgIDwvcD5cclxuXHJcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm9uYi1hY29lc1wiPlxyXG4gICAgICAgICAgICA8YnV0dG9uIGNsYXNzTmFtZT1cImJ0bi1wcmltYXJpYVwiIG9uQ2xpY2s9eygpID0+IGNoYW1hckFwaSgpfSBkaXNhYmxlZD17Y2FycmVnYW5kb30+XHJcbiAgICAgICAgICAgICAge2NhcnJlZ2FuZG8gPyAnQ2hhbWFuZG8gQVBJLi4uJyA6ICdEaXNwYXJhciBIZWxsbyBXb3JsZCd9XHJcbiAgICAgICAgICAgIDwvYnV0dG9uPlxyXG4gICAgICAgICAgICA8YnV0dG9uIGNsYXNzTmFtZT1cImJ0bi1zZWN1bmRhcmlhXCIgb25DbGljaz17b25BYnJpclBkdn0+XHJcbiAgICAgICAgICAgICAgQWJyaXIgY2FkYXN0cm8gLyBvcGVyYWNpb25hbCDihpJcclxuICAgICAgICAgICAgPC9idXR0b24+XHJcbiAgICAgICAgICAgIHtsYXRlbmNpYSAhPT0gbnVsbCAmJiAoXHJcbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwib25iLWxhdGVuY2lhXCIgdGl0bGU9XCJJZGEgZSB2b2x0YSBhdMOpIGEgQVBJIGxvY2FsXCI+XHJcbiAgICAgICAgICAgICAgICB7bGF0ZW5jaWEgPCAxID8gJzwgMScgOiBsYXRlbmNpYS50b0ZpeGVkKDEpfSBtc1xyXG4gICAgICAgICAgICAgIDwvc3Bhbj5cclxuICAgICAgICAgICAgKX1cclxuICAgICAgICAgIDwvZGl2PlxyXG5cclxuICAgICAgICAgIHtlcnJvICYmIChcclxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJvbmItYWxlcnRhXCI+XHJcbiAgICAgICAgICAgICAgTsOjbyBmb2kgcG9zc8OtdmVsIGZhbGFyIGNvbSBhIEFQSSBsb2NhbCAoe2Vycm99KS4gRWxhIHNvYmUganVudG8gY29tIGFcclxuICAgICAgICAgICAgICBjYXNjYSDigJQgY29uZmlyYSBvIHByb2Nlc3NvIDxjb2RlPkhlbGxvLkFwaTwvY29kZT4uXHJcbiAgICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgKX1cclxuICAgICAgICA8L3NlY3Rpb24+XHJcblxyXG4gICAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cIm9uYi1wYWluZWxcIj5cclxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwib25iLXBhaW5lbC1oZWFkXCI+XHJcbiAgICAgICAgICAgIDxoMj5SZXNwb3N0YSBkbyBiYWNrZW5kPC9oMj5cclxuICAgICAgICAgICAge3Jlc3Bvc3RhICYmIDxzcGFuIGNsYXNzTmFtZT1cIm9uYi10YWdcIj4yMDAgT0s8L3NwYW4+fVxyXG4gICAgICAgICAgPC9kaXY+XHJcblxyXG4gICAgICAgICAge3Jlc3Bvc3RhID8gKFxyXG4gICAgICAgICAgICA8PlxyXG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cIm9uYi1tZW5zYWdlbVwiPntyZXNwb3N0YS5tZW5zYWdlbX08L3A+XHJcbiAgICAgICAgICAgICAgPGRsPlxyXG4gICAgICAgICAgICAgICAgPGRpdj48ZHQ+UnVudGltZTwvZHQ+PGRkPntyZXNwb3N0YS5ydW50aW1lfTwvZGQ+PC9kaXY+XHJcbiAgICAgICAgICAgICAgICA8ZGl2PjxkdD5Nw6FxdWluYTwvZHQ+PGRkPntyZXNwb3N0YS5tYXF1aW5hfTwvZGQ+PC9kaXY+XHJcbiAgICAgICAgICAgICAgICA8ZGl2PjxkdD5Ib3LDoXJpbyBkbyBzZXJ2aWRvciBsb2NhbDwvZHQ+PGRkPntyZXNwb3N0YS5ob3JhcmlvfTwvZGQ+PC9kaXY+XHJcbiAgICAgICAgICAgICAgPC9kbD5cclxuICAgICAgICAgICAgPC8+XHJcbiAgICAgICAgICApIDogKFxyXG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJvbmItdmF6aW9cIj5OZW5odW1hIGNoYW1hZGEgYWluZGEuIENsaXF1ZSBubyBib3TDo28gcGFyYSBmYWxhciBjb20gbyAuTkVULjwvcD5cclxuICAgICAgICAgICl9XHJcbiAgICAgICAgPC9zZWN0aW9uPlxyXG4gICAgICA8L21haW4+XHJcblxyXG4gICAgICA8Zm9vdGVyIGNsYXNzTmFtZT1cIm9uYi1yb2RhcGVcIj5cclxuICAgICAgICA8ZGl2PjxzcGFuIGNsYXNzTmFtZT1cInBlY2FcIj5mcm9udGVuZC88L3NwYW4+IFJlYWN0ICsgVml0ZTxlbT50b2RhcyBhcyB0ZWxhczwvZW0+PC9kaXY+XHJcbiAgICAgICAgPGRpdj48c3BhbiBjbGFzc05hbWU9XCJwZWNhXCI+c2hlbGwvPC9zcGFuPiBXUEYgKyBXZWJWaWV3MjxlbT5zw7MgYSBtb2xkdXJhPC9lbT48L2Rpdj5cclxuICAgICAgICA8ZGl2PjxzcGFuIGNsYXNzTmFtZT1cInBlY2FcIj5iYWNrZW5kLzwvc3Bhbj4gLk5FVCAxMCBsb2NhbDxlbT5kb23DrW5pbywgZmlzY2FsLCBoYXJkd2FyZTwvZW0+PC9kaXY+XHJcbiAgICAgIDwvZm9vdGVyPlxyXG4gICAgPC9kaXY+XHJcbiAgKVxyXG59XHJcbiJdfQ==

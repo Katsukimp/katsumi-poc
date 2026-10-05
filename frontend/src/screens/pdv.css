@@ -1,0 +1,511 @@
+/* Tela operacional (frente de caixa): CLARA, DENSA, alto contraste e
+   teclado-first. Parece "antiquada" de propósito — o operador precisa ver
+   muitos itens, ler de longe e não usar mouse. Zero animação. */
+
+.pdv {
+  --azul: #14395e;
+  --azul-claro: #1d4e80;
+  --borda: #b9c3d0;
+  --borda-forte: #7d8b9c;
+  --fundo: #eef1f5;
+  --papel: #ffffff;
+  --txt: #10161d;
+  --txt-dim: #55616f;
+  --verde: #146c2e;
+  --verde-bg: #e3f4e7;
+  --vermelho: #a51b1b;
+  --vermelho-bg: #fbe6e6;
+  --destaque: #fff6d6;
+
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  color: var(--txt);
+  background: var(--fundo);
+  font-size: 14px;
+}
+
+/* ---------- barra superior ---------- */
+
+.pdv-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0.75rem;
+  color: #fff;
+  background: var(--azul);
+  border-bottom: 2px solid #0c2740;
+}
+
+.pdv-ident {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.pdv-ident strong {
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+
+.pdv-ident span {
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+.pdv-op {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.8rem;
+}
+
+.pdv-caixa-aberto {
+  padding: 0.12rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #052e12;
+  background: #7ee2a0;
+  border-radius: 3px;
+}
+
+.pdv-hora {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.pdv-voltar {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+  color: #dbe6f2;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pdv-voltar:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- corpo ---------- */
+
+.pdv-corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 0;
+  min-height: 0;
+}
+
+.pdv-venda {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 0;
+  border-right: 1px solid var(--borda-forte);
+}
+
+/* ---------- entrada de item ---------- */
+
+.pdv-entrada {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  padding: 0.7rem 0.75rem;
+  background: var(--papel);
+  border-bottom: 1px solid var(--borda);
+}
+
+.pdv-entrada label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--txt-dim);
+}
+
+.pdv-entrada input {
+  padding: 0.45rem 0.55rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--txt);
+  background: #fff;
+  border: 2px solid var(--borda-forte);
+  border-radius: 3px;
+}
+
+.pdv-entrada input:focus {
+  outline: 0;
+  border-color: var(--azul-claro);
+  background: #f7fbff;
+}
+
+.pdv-entrada .pdv-qtd {
+  flex: 0 0 120px;
+}
+
+.pdv-entrada .pdv-qtd input {
+  text-align: right;
+}
+
+.pdv-add {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--verde);
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pdv-add:hover {
+  background: #0f5624;
+}
+
+/* ---------- grid de itens (o coração da tela) ---------- */
+
+.pdv-grid-wrap {
+  overflow: auto;
+  background: var(--papel);
+}
+
+.pdv-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdv-grid thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  color: #eaf1f8;
+  background: var(--azul-claro);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pdv-grid tbody td {
+  /* densidade: linhas curtas para caber muitos itens sem scroll */
+  padding: 0.28rem 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  border-bottom: 1px solid #e3e8ee;
+  border-right: 1px solid #eef1f5;
+}
+
+.pdv-grid tbody tr:nth-child(even) td {
+  background: #f7f9fb;
+}
+
+.pdv-grid tbody tr.atual td {
+  /* último item bipado: destaque amarelo, padrão de PDV */
+  background: var(--destaque);
+  font-weight: 600;
+}
+
+.pdv-grid .c-item,
+.pdv-grid .c-cod,
+.pdv-grid .c-un {
+  color: var(--txt-dim);
+  font-size: 0.85rem;
+}
+
+.pdv-grid .c-item { width: 46px; }
+.pdv-grid .c-cod { width: 132px; }
+.pdv-grid .c-un { width: 44px; text-align: center; }
+.pdv-grid .c-num { width: 104px; text-align: right; }
+.pdv-grid .forte { font-weight: 700; }
+
+.pdv-sem-itens td {
+  padding: 2.5rem 0.5rem !important;
+  text-align: center;
+  color: var(--txt-dim);
+  background: var(--papel) !important;
+}
+
+/* ---------- faixa de aviso ---------- */
+
+.pdv-aviso {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--txt-dim);
+  background: #e4e9ef;
+  border-top: 1px solid var(--borda);
+}
+
+.pdv-aviso.erro {
+  color: var(--vermelho);
+  background: var(--vermelho-bg);
+}
+
+.pdv-aviso.ok {
+  color: var(--verde);
+  background: var(--verde-bg);
+}
+
+/* ---------- lateral ---------- */
+
+.pdv-lateral {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  min-height: 0;
+  background: #e7ebf1;
+}
+
+.pdv-lateral .rot {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--txt-dim);
+}
+
+.pdv-ultimo {
+  padding: 0.6rem 0.75rem;
+  background: var(--papel);
+  border-bottom: 1px solid var(--borda);
+}
+
+.pdv-ultimo .nome {
+  display: block;
+  margin: 0.25rem 0 0.15rem;
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.pdv-ultimo .nome.vazio {
+  color: var(--borda-forte);
+}
+
+.pdv-ultimo .calc {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--txt-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.pdv-ultimo .sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* total: o número mais importante da tela — legível a metros de distância */
+.pdv-total {
+  padding: 0.7rem 0.75rem 0.85rem;
+  color: #fff;
+  background: var(--verde);
+}
+
+.pdv-total .rot {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pdv-total strong {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdv-atalhos {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.pdv-atalhos ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 0.6rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  color: var(--txt-dim);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.9rem;
+  margin-right: 0.25rem;
+  padding: 0.05rem 0.25rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--txt);
+  background: #fff;
+  border: 1px solid var(--borda-forte);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+}
+
+/* ---------- catálogo de teste ---------- */
+
+.pdv-catalogo {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.35rem;
+  padding: 0.6rem 0.75rem 0.75rem;
+  min-height: 0;
+}
+
+.pdv-catalogo ul {
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--papel);
+  border: 1px solid var(--borda);
+}
+
+.pdv-catalogo li + li {
+  border-top: 1px solid #eef1f5;
+}
+
+.pdv-catalogo button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 0.5rem;
+  width: 100%;
+  padding: 0.3rem 0.45rem;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.pdv-catalogo button:hover {
+  background: #eaf2fb;
+}
+
+.pdv-catalogo code {
+  grid-column: 1;
+  font-family: 'Cascadia Code', Consolas, monospace;
+  font-size: 0.74rem;
+  color: var(--azul-claro);
+}
+
+.pdv-catalogo span {
+  grid-column: 1;
+  font-size: 0.8rem;
+}
+
+.pdv-catalogo b {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- modal de cadastro rápido ---------- */
+
+.pdv-modal-fundo {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(16, 22, 29, 0.55);
+}
+
+.pdv-modal {
+  width: min(620px, 100%);
+  padding: 1.1rem 1.25rem 1.25rem;
+  background: var(--papel);
+  border: 1px solid var(--borda-forte);
+  border-radius: 4px;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+
+.pdv-modal h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.pdv-modal-sub {
+  margin: 0.35rem 0 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--txt-dim);
+}
+
+.pdv-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.pdv-form .largo {
+  grid-column: 1 / -1;
+}
+
+.pdv-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--txt-dim);
+}
+
+.pdv-form input,
+.pdv-form select {
+  padding: 0.4rem 0.5rem;
+  font-size: 1rem;
+  color: var(--txt);
+  background: #fff;
+  border: 2px solid var(--borda-forte);
+  border-radius: 3px;
+}
+
+.pdv-form input:focus,
+.pdv-form select:focus {
+  outline: 0;
+  border-color: var(--azul-claro);
+  background: #f7fbff;
+}
+
+.pdv-modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.1rem;
+}
+
+.btn-fantasma {
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--txt-dim);
+  background: transparent;
+  border: 1px solid var(--borda-forte);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn-fantasma:hover {
+  background: #f0f3f7;
+}
